@@ -33,7 +33,7 @@ npm install
 npm run dev
 ```
 
-The site is served at `http://localhost:5173`; the admin dashboard is at `/admin`. The public LP and founder forms have separate inquiry queues in the dashboard. Create `frontend/.env` from `.env.example` to configure the API URL. The dashboard accepts team profile changes and publishes them immediately to the public Team section.
+The site is served at `http://localhost:5173`; the admin dashboard is at `/admin`. The frontend includes a Vercel SPA rewrite so direct navigation to `/admin` serves the React entry point. The public LP and founder forms have separate inquiry queues in the dashboard. Create `frontend/.env` from `.env.example` to configure the API URL. The dashboard accepts team profile changes and publishes them immediately to the public Team section.
 
 ## Production notes
 
