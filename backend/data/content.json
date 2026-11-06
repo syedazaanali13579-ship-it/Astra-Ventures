@@ -1,0 +1,42 @@
+{
+  "heroHeadline": "The next trillion-dollar AI wave won't live in chatbots. It will live in factories, fleets, machines, and critical infrastructure.",
+  "heroSubhead": "We back founders building the intelligence layer for the physical world.",
+  "thesisHeading": "The AI that earns the next decade of returns lives in the physical world.",
+  "thesisLeft": "Foundation models are moving beyond screens and into the systems that make and move things. Models such as π0, paired with platforms like GR00T and Jetson Thor, are opening a new frontier for machines that can perceive, reason, and act.",
+  "thesisRight": "As the humanoid bill of materials drops, new products become economically viable across factories, fleets, and critical infrastructure. We invest where intelligent software meets real-world operations—and where a $10B platform can be built.",
+  "wedges": [
+    "Industrial Intelligence",
+    "Logistics",
+    "Robotics Middleware",
+    "Energy",
+    "Agricultural / Construction",
+    "Applied Vertical AI"
+  ],
+  "stackIntro": "We use AI across the investment lifecycle: from sourcing and diligence to portfolio monitoring and reporting. Our long-term ambition is to work alongside 1,300 founders building $10B platforms.",
+  "teamMembers": [
+    {
+      "id": "ramiro-lopez-garcia",
+      "name": "Ramiro L?pez-Garc?a",
+      "role": "General Partner",
+      "bio": "Ramiro L?pez-Garc?a's background includes CEMEX and Intel.",
+      "affiliations": [
+        "CEMEX",
+        "Intel"
+      ],
+      "linkedinUrl": "https://www.linkedin.com/in/ramirolg"
+    },
+    {
+      "id": "ishtiaque-mohammad",
+      "name": "Ishtiaque Mohammad",
+      "role": "General Partner",
+      "bio": "Ishtiaque Mohammad's background includes Amazon, Intel, Broadcom, and Cornell.",
+      "affiliations": [
+        "Amazon",
+        "Intel",
+        "Broadcom",
+        "Cornell"
+      ],
+      "linkedinUrl": "https://www.linkedin.com/in/ishtiaque-mohammad/"
+    }
+  ]
+}
