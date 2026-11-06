@@ -1,6 +1,6 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { ArrowLeft, ArrowUpRight, Plus, RefreshCw, Save, Trash2 } from 'lucide-react';
-import { getContent, getLpInquiries, getSubmissions, loginAdmin, updateContent } from '../api';
+import { ApiError, getContent, getLpInquiries, getSubmissions, updateContent } from '../api';
 import type { LpInquiry, Submission, TeamMember, WebsiteContent } from '../types';
 
 const editableKeys = [
@@ -14,8 +14,7 @@ const editableKeys = [
 
 export default function AdminDashboard() {
   const [token, setToken] = useState(() => sessionStorage.getItem('astra-admin-token') ?? '');
-  const [email, setEmail] = useState('admin@astraventures.com');
-  const [password, setPassword] = useState('');
+  const [accessToken, setAccessToken] = useState('');
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [lpInquiries, setLpInquiries] = useState<LpInquiry[]>([]);
   const [content, setContent] = useState<WebsiteContent | null>(null);
@@ -38,11 +37,14 @@ export default function AdminDashboard() {
       setContent(websiteContent);
       setTeamDraft(Array.isArray(websiteContent.teamMembers) ? websiteContent.teamMembers : []);
     } catch (cause) {
-      if (cause instanceof Error && cause.message.toLowerCase().includes('bearer')) {
+      if (cause instanceof ApiError && cause.status === 401) {
         sessionStorage.removeItem('astra-admin-token');
         setToken('');
+        setAccessToken('');
+        setError('Your saved admin token is invalid or expired. Enter the current backend ADMIN_ACCESS_TOKEN.');
+      } else {
+        setError(cause instanceof Error ? cause.message : 'Unable to load dashboard.');
       }
-      setError(cause instanceof Error ? cause.message : 'Unable to load dashboard.');
     } finally {
       setLoading(false);
     }
@@ -56,15 +58,14 @@ export default function AdminDashboard() {
     event.preventDefault();
     setLoading(true);
     setError('');
-    try {
-      const result = await loginAdmin(email, password);
-      sessionStorage.setItem('astra-admin-token', result.accessToken);
-      setPassword('');
-      setToken(result.accessToken);
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'Unable to sign in.');
+    const candidate = accessToken.trim();
+    if (!candidate) {
+      setError('Enter your admin access token.');
       setLoading(false);
+      return;
     }
+    sessionStorage.setItem('astra-admin-token', candidate);
+    setToken(candidate);
   }
 
   async function saveContent(event: FormEvent<HTMLFormElement>) {
@@ -115,7 +116,7 @@ export default function AdminDashboard() {
   function disconnect() {
     sessionStorage.removeItem('astra-admin-token');
     setToken('');
-    setPassword('');
+    setAccessToken('');
     setContent(null);
     setTeamDraft([]);
     setSubmissions([]);
@@ -133,11 +134,10 @@ export default function AdminDashboard() {
         <div className="admin-title-row"><div><p className="eyebrow"><span /> COMMAND VIEW</p><h1>Inquiries</h1></div>{token && <button className="admin-refresh" onClick={() => void loadDashboard(token)} disabled={loading}><RefreshCw size={15} /> Refresh</button>}</div>
         {!token ? (
           <form className="admin-connect" onSubmit={connect}>
-            <h2>Admin access</h2><p>Sign in to manage team profiles and review founder and LP inquiries.</p>
-            <label>Email<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required autoComplete="username" /></label>
-            <label>Password<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required autoComplete="current-password" /></label>
+            <h2>Admin access</h2><p>Enter your access token to manage team profiles and review founder and LP inquiries.</p>
+            <label>Admin access token<input type="password" value={accessToken} onChange={(event) => setAccessToken(event.target.value)} required autoComplete="current-password" /></label>
             {error && <p className="admin-error login-error">{error}</p>}
-            <button className="button button-copper" type="submit" disabled={loading}>{loading ? 'Signing in…' : 'Sign in'} <ArrowUpRight size={15} /></button>
+            <button className="button button-copper" type="submit" disabled={loading}>{loading ? 'Checking token…' : 'Continue'} <ArrowUpRight size={15} /></button>
           </form>
         ) : (
           <>

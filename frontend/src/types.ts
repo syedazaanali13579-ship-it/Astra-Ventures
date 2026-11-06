@@ -19,12 +19,6 @@ export interface TeamMember {
   linkedinUrl: string;
 }
 
-export interface AdminLoginResponse {
-  accessToken: string;
-  tokenType: 'Bearer';
-  expiresIn: number;
-}
-
 export interface Submission {
   id: string;
   createdAt: string;

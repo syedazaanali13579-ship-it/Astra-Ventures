@@ -214,7 +214,7 @@ export default function App() {
 
       <footer className="site-footer">
         <a className="wordmark footer-wordmark" href="#hero"><span className="wordmark-star">✳</span> ASTRA<span className="wordmark-light"> VENTURES</span></a>
-        <nav aria-label="Footer navigation"><a href="#thesis">Thesis</a><a href="#stack">How we operate</a><a href="#team">Team</a><a href="#lps">For LPs</a><a href="#contact">Founders</a><a className="footer-admin-link" href="/admin">Admin access</a></nav>
+        <nav aria-label="Footer navigation"><a href="#thesis">Thesis</a><a href="#stack">How we operate</a><a href="#team">Team</a><a href="#lps">For LPs</a><a href="#contact">Founders</a></nav>
         <p>© 2026 Astra Ventures. All rights reserved.</p>
       </footer>
     </div>
