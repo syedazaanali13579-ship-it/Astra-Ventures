@@ -136,6 +136,8 @@ button,input,textarea,select{font:inherit}
 .site-footer{background:#0B132B;color:#f9f8f6;padding:22px 6.4%;min-height:80px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #30394f}
 .footer-wordmark{font-size:11px}
 .site-footer nav{display:flex;gap:23px;font-size:10px;color:#bec1c9}
+.site-footer nav .footer-admin-link{color:#858995}
+.site-footer nav .footer-admin-link:hover{color:#C17817}
 .site-footer>p{font-size:9px;color:#858995;margin:0}
 
 .admin-page{min-height:100vh;background:#F9F8F6}
