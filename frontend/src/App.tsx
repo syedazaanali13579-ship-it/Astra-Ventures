@@ -27,7 +27,7 @@ export default function App() {
   const [formMessage, setFormMessage] = useState('');
   const [lpFormState, setLpFormState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [lpFormMessage, setLpFormMessage] = useState('');
-  const isAdmin = window.location.pathname === '/admin/dashboard';
+  const isAdmin = window.location.pathname.replace(/\/+$/, '') === '/admin';
 
   useEffect(() => {
     if (isAdmin) return;
